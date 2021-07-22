@@ -22,21 +22,21 @@ ActiveRecord::Schema.define(version: 2021_07_21_081045) do
 
   create_table "categories", force: :cascade do |t|
     t.string "title", null: false
-    t.integer "test_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["test_id"], name: "index_categories_on_test_id"
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string "body"
+    t.string "body", null: false
+    t.integer "test_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["test_id"], name: "index_questions_on_test_id"
   end
 
   create_table "tests", force: :cascade do |t|
     t.string "title", null: false
-    t.integer "level"
+    t.integer "level", default: 1
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -50,6 +50,6 @@ ActiveRecord::Schema.define(version: 2021_07_21_081045) do
   end
 
   add_foreign_key "answers", "questions"
-  add_foreign_key "categories", "tests"
+  add_foreign_key "questions", "tests"
   add_foreign_key "tests", "categories"
 end
