@@ -7,26 +7,32 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # # Создайте набор начальных данных для всех существующих моделей в файле db/seeds.rb
-# Создайте метод класса в модели Test, который возвращает отсортированный по убыванию
-#  массив названий всех Тестов у которых Категория называется определённым образом 
-#  (название категории передается в метод в качестве аргумента).
 
-tests = Test.create(title: "Rails",
-                    level: "2")
-tests = Test.create(title: "Rails",
-                    level: "3")
-tests = Test.create(title: "Ruby",
-                    level: "2")
+categories = Category.create([{title: "Rails.Интерфейс запросов Active Record"},
+                              {title: "Ruby"},
+                              {title: "SQL"}])
 
-tests = Test.create(title: "SQL",
-                    level: "3")
+tests = Test.create([{title: "Rails", level: "2", category_id: categories[0].id},
+                     {title: "Rails", level: "3", category_id: categories[0].id},
+                     {title: "Ruby", level: "2", category_id: categories[1].id},
+                     {title: "SQL", level: "1", category_id: categories[2].id}])
 
 
-categories = Category.create(title: "Rails.Интерфейс запросов Active Record")
-categories = Category.create(title: "Rails")
+questions = Question.create([{body: "Как вывести список всех Тестов,которые проходит или когда-либо проходил Пользователь", test_id: tests[0].id},
+                             {body: "Вывести название всех тестов с определенной категории", test_id: tests[1].id},
+                             {body: "как объеденить с помощью joins", test_id: tests[3].id}])
+ 
+
+answers = Answer.create([{correct: true, question_id: questions[0].id},
+                         {correct: false, question_id: questions[0].id},
+                         {correct: true, question_id: questions[1].id},
+                         {correct: false, question_id: questions[1].id},
+                         {correct: true, question_id: questions[2].id},
+                         {correct: false, question_id: questions[2].id}])
 
 users = User.create(name: "Gerrard")
 
-answers = Answer.create(correct: true)
 
-questions = Question.create(body: "Как вывести список всех Тестов,которые проходит или когда-либо проходил Пользователь")
+test_users = TestUser.create([{user_id: users.id, test_id: tests[0].id},
+                              {user_id: users.id, test_id: tests[1].id},
+                              {user_id: users.id, test_id: tests[2].id}])
