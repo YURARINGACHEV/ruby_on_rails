@@ -6,8 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# # Создайте набор начальных данных для всех существующих моделей в файле db/seeds.rb
-
 categories = Category.create([{title: "Rails.Интерфейс запросов Active Record"},
                               {title: "Ruby"},
                               {title: "SQL"}])
