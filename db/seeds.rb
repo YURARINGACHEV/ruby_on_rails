@@ -30,9 +30,12 @@ answers = Answer.create([{correct: true, question_id: questions[0].id},
                          {correct: true, question_id: questions[2].id},
                          {correct: false, question_id: questions[2].id}])
 
-users = User.create(name: "Gerrard")
+users = User.create([{name: "Gerrard"},
+                     {name: "Fill"},
+                     {name: "Saka"}])
 
 
-test_users = TestUser.create([{user_id: users.id, test_id: tests[0].id},
-                              {user_id: users.id, test_id: tests[1].id},
-                              {user_id: users.id, test_id: tests[2].id}])
+test_users = TestUser.create([{user_id: users[0].id, test_id: tests[0].id},
+                              {user_id: users[0].id, test_id: tests[1].id},
+                              {user_id: users[2].id, test_id: tests[2].id},
+                             {user_id: users[1].id, test_id: tests[3].id}])
