@@ -2,6 +2,8 @@ class Test < ApplicationRecord
 
   belongs_to :category
 
+  belongs_to :user
+
   has_many :questions
 
 	has_many :test_users
