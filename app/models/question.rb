@@ -2,10 +2,8 @@ class Question < ApplicationRecord
 
   validates :body, presence: true
 
-  has_many :answer
+  has_many :answers
 
   belongs_to :test
-
-
 
 end

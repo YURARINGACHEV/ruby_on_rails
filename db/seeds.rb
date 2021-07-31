@@ -35,8 +35,9 @@ questions = Question.create!([{body: "Как вывести список все�
 answers = Answer.create!([{correct: true, question_id: questions[0].id},
                          {correct: false, question_id: questions[0].id},
                          {correct: true, question_id: questions[0].id},
-                         {correct: false, question_id: questions[0].id},
-                         {correct: false, question_id: questions[0].id}])
+                         {correct: false, question_id: questions[1].id},
+                         {correct: false, question_id: questions[1].id},
+                         {correct: false, question_id: questions[1].id}])
 
 test_users = TestUser.create!([{user_id: users[0].id, test_id: tests[0].id},
                               {user_id: users[0].id, test_id: tests[1].id},
