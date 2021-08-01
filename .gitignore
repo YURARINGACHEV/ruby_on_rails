@@ -13,6 +13,9 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*
+log/development.log
+tmp/cache/bootsnap/compile-cache/7d/548a483de99720
+tmp/cache/bootsnap/load-path-cache
 /tmp/*
 !/log/.keep
 !/tmp/.keep
