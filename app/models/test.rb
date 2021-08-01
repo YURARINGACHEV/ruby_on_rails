@@ -20,9 +20,9 @@ class Test < ApplicationRecord
 
   scope :hard_level, -> { where(level: 5..Float::INFINITY) }
 
-  scope :join_category_test, -> { self.joins(:category).where(categories: { title: title }) }  
+  scope :join_category_test, -> (title)  { self.joins(:category).where(categories: { title: title }) }  
 
-  def self.order_mas_title(title)
+  def self.order_mas_title
     join_category_test.order(title: :DESC).pluck('tests.title')
   end
 

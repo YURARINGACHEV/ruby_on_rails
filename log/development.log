@@ -11670,3 +11670,670 @@ Migrating to AddEmailToUser (20210730141638)
   [1m[36mTRANSACTION (61.6ms)[0m  [1m[36mcommit transaction[0m
   [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
   [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (84.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (132.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTests (20210721080909)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_cda342dc0a"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_category_id" ON "tests" ("category_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721080909"]]
+  [1m[36mTRANSACTION (94.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateQuestions (20210721080935)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "questions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "body" varchar NOT NULL, "test_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_cb4b358d50"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_questions_on_test_id" ON "questions" ("test_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721080935"]]
+  [1m[36mTRANSACTION (99.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateAnswers (20210721081006)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "answers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "correct" boolean, "question_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_3d5ed4418f"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_answers_on_question_id" ON "answers" ("question_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721081006"]]
+  [1m[36mTRANSACTION (88.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20210721081020)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721081020"]]
+  [1m[36mTRANSACTION (143.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateCategories (20210721081045)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721081045"]]
+  [1m[36mTRANSACTION (108.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateTestUsers (20210726152811)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "test_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "test_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_9cdf97435d"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_62a50a0902"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_test_users_on_user_id" ON "test_users" ("user_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_test_users_on_test_id" ON "test_users" ("test_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210726152811"]]
+  [1m[36mTRANSACTION (118.8ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserIdToTest (20210728141933)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atests_on_category_id" ON "atests" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "atests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "tests"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "tests"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "fk_rails_cda342dc0a"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_category_id" ON "tests" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "tests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "atests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_user_id" ON "tests" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atests_on_user_id" ON "atests" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atests_on_category_id" ON "atests" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "atests" ("id","title","level","category_id","created_at","updated_at","user_id")
+                     SELECT "id","title","level","category_id","created_at","updated_at","user_id" FROM "tests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "tests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "fk_rails_cda342dc0a"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+, CONSTRAINT "fk_rails_e0c5eb5e4a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_tests_on_category_id" ON "tests" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_tests_on_user_id" ON "tests" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "tests" ("id","title","level","category_id","created_at","updated_at","user_id")
+                     SELECT "id","title","level","category_id","created_at","updated_at","user_id" FROM "atests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210728141933"]]
+  [1m[36mTRANSACTION (102.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddEmailToUser (20210730141638)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "email" varchar[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210730141638"]]
+  [1m[36mTRANSACTION (122.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-08-01 07:19:02.108976"], ["updated_at", "2021-08-01 07:19:02.108976"]]
+  [1m[36mTRANSACTION (72.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (112.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (99.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTests (20210721080909)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_cda342dc0a"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_category_id" ON "tests" ("category_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721080909"]]
+  [1m[36mTRANSACTION (109.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateQuestions (20210721080935)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "questions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "body" varchar NOT NULL, "test_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_cb4b358d50"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_questions_on_test_id" ON "questions" ("test_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721080935"]]
+  [1m[36mTRANSACTION (101.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateAnswers (20210721081006)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "answers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "correct" boolean, "question_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_3d5ed4418f"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_answers_on_question_id" ON "answers" ("question_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721081006"]]
+  [1m[36mTRANSACTION (136.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20210721081020)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721081020"]]
+  [1m[36mTRANSACTION (122.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateCategories (20210721081045)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721081045"]]
+  [1m[36mTRANSACTION (120.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateTestUsers (20210726152811)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "test_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "test_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_9cdf97435d"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_62a50a0902"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_test_users_on_user_id" ON "test_users" ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_test_users_on_test_id" ON "test_users" ("test_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210726152811"]]
+  [1m[36mTRANSACTION (147.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserIdToTest (20210728141933)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atests_on_category_id" ON "atests" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "atests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "tests"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "tests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "fk_rails_cda342dc0a"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_category_id" ON "tests" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "tests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "atests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_user_id" ON "tests" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atests_on_user_id" ON "atests" ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atests_on_category_id" ON "atests" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "atests" ("id","title","level","category_id","created_at","updated_at","user_id")
+                     SELECT "id","title","level","category_id","created_at","updated_at","user_id" FROM "tests"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "tests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "fk_rails_cda342dc0a"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+, CONSTRAINT "fk_rails_e0c5eb5e4a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_category_id" ON "tests" ("category_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_user_id" ON "tests" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "tests" ("id","title","level","category_id","created_at","updated_at","user_id")
+                     SELECT "id","title","level","category_id","created_at","updated_at","user_id" FROM "atests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210728141933"]]
+  [1m[36mTRANSACTION (110.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddEmailToUser (20210730141638)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.9ms)[0m  [1m[35mALTER TABLE "users" ADD "email" varchar[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210730141638"]]
+  [1m[36mTRANSACTION (119.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-08-01 07:46:33.096607"], ["updated_at", "2021-08-01 07:46:33.096607"]]
+  [1m[36mTRANSACTION (95.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Rails.Интерфейс запросов Active Record"], ["created_at", "2021-08-01 07:46:40.106819"], ["updated_at", "2021-08-01 07:46:40.106819"]]
+  [1m[36mTRANSACTION (145.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Ruby"], ["created_at", "2021-08-01 07:46:40.258731"], ["updated_at", "2021-08-01 07:46:40.258731"]]
+  [1m[36mTRANSACTION (82.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "SQL"], ["created_at", "2021-08-01 07:46:40.347231"], ["updated_at", "2021-08-01 07:46:40.347231"]]
+  [1m[36mTRANSACTION (93.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.4ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Rest"], ["created_at", "2021-08-01 07:46:40.447173"], ["updated_at", "2021-08-01 07:46:40.447173"]]
+  [1m[36mTRANSACTION (103.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ger@mail.ru"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES (?, ?, ?, ?)[0m  [["name", "Gerrard"], ["created_at", "2021-08-01 07:46:40.570949"], ["updated_at", "2021-08-01 07:46:40.570949"], ["email", "ger@mail.ru"]]
+  [1m[36mTRANSACTION (122.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "fill@mail.ru"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES (?, ?, ?, ?)[0m  [["name", "Fill"], ["created_at", "2021-08-01 07:46:40.702746"], ["updated_at", "2021-08-01 07:46:40.702746"], ["email", "fill@mail.ru"]]
+  [1m[36mTRANSACTION (124.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "saka@mail.ru"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES (?, ?, ?, ?)[0m  [["name", "Saka"], ["created_at", "2021-08-01 07:46:40.835660"], ["updated_at", "2021-08-01 07:46:40.835660"], ["email", "saka@mail.ru"]]
+  [1m[36mTRANSACTION (136.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "son@mail.ru"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES (?, ?, ?, ?)[0m  [["name", "Son"], ["created_at", "2021-08-01 07:46:40.985796"], ["updated_at", "2021-08-01 07:46:40.985796"], ["email", "son@mail.ru"]]
+  [1m[36mTRANSACTION (120.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "tests" WHERE "tests"."title" = ? AND "tests"."title" = ? AND "tests"."level" = ? LIMIT ?[0m  [["title", "Rails"], ["title", "Rails"], ["level", 4], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.3ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? ORDER BY "categories"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("title", "level", "category_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Rails"], ["level", 4], ["category_id", 1], ["created_at", "2021-08-01 07:46:41.135903"], ["updated_at", "2021-08-01 07:46:41.135903"], ["user_id", 1]]
+  [1m[36mTRANSACTION (113.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tests" WHERE "tests"."title" = ? AND "tests"."title" = ? AND "tests"."level" = ? LIMIT ?[0m  [["title", "Rail"], ["title", "Rail"], ["level", 4], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? ORDER BY "categories"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Create (0.4ms)[0m  [1m[32mINSERT INTO "tests" ("title", "level", "category_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Rail"], ["level", 4], ["category_id", 1], ["created_at", "2021-08-01 07:46:41.260940"], ["updated_at", "2021-08-01 07:46:41.260940"], ["user_id", 2]]
+  [1m[36mTRANSACTION (77.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tests" WHERE "tests"."title" = ? AND "tests"."title" = ? AND "tests"."level" = ? LIMIT ?[0m  [["title", "Ruby"], ["title", "Ruby"], ["level", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? ORDER BY "categories"."title" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("title", "level", "category_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Ruby"], ["level", 2], ["category_id", 2], ["created_at", "2021-08-01 07:46:41.354351"], ["updated_at", "2021-08-01 07:46:41.354351"], ["user_id", 3]]
+  [1m[36mTRANSACTION (119.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "tests" WHERE "tests"."title" = ? AND "tests"."title" = ? AND "tests"."level" = ? LIMIT ?[0m  [["title", "SQL"], ["title", "SQL"], ["level", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? ORDER BY "categories"."title" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("title", "category_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["title", "SQL"], ["category_id", 3], ["created_at", "2021-08-01 07:46:41.504881"], ["updated_at", "2021-08-01 07:46:41.504881"], ["user_id", 4]]
+  [1m[36mTRANSACTION (138.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mQuestion Create (0.3ms)[0m  [1m[32mINSERT INTO "questions" ("body", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Как вывести список всех Тестов,которые проходит или когда-либо проходил Пользователь"], ["test_id", 1], ["created_at", "2021-08-01 07:46:41.693078"], ["updated_at", "2021-08-01 07:46:41.693078"]]
+  [1m[36mTRANSACTION (71.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mQuestion Create (0.3ms)[0m  [1m[32mINSERT INTO "questions" ("body", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Вывести название всех тестов с определенной категории"], ["test_id", 2], ["created_at", "2021-08-01 07:46:41.775691"], ["updated_at", "2021-08-01 07:46:41.775691"]]
+  [1m[36mTRANSACTION (104.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mQuestion Create (0.3ms)[0m  [1m[32mINSERT INTO "questions" ("body", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "как объеденить с помощью joins"], ["test_id", 4], ["created_at", "2021-08-01 07:46:41.891533"], ["updated_at", "2021-08-01 07:46:41.891533"]]
+  [1m[36mTRANSACTION (72.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mQuestion Create (0.3ms)[0m  [1m[32mINSERT INTO "questions" ("body", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "как объеденить с помощью joins"], ["test_id", 3], ["created_at", "2021-08-01 07:46:41.973290"], ["updated_at", "2021-08-01 07:46:41.973290"]]
+  [1m[36mTRANSACTION (106.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 1]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.3ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 1], ["question_id", 1], ["created_at", "2021-08-01 07:46:42.100952"], ["updated_at", "2021-08-01 07:46:42.100952"]]
+  [1m[36mTRANSACTION (110.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 1]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.4ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 0], ["question_id", 1], ["created_at", "2021-08-01 07:46:42.221965"], ["updated_at", "2021-08-01 07:46:42.221965"]]
+  [1m[36mTRANSACTION (102.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 1]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.3ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 1], ["question_id", 1], ["created_at", "2021-08-01 07:46:42.336996"], ["updated_at", "2021-08-01 07:46:42.336996"]]
+  [1m[36mTRANSACTION (72.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 2]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.2ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 0], ["question_id", 2], ["created_at", "2021-08-01 07:46:42.418785"], ["updated_at", "2021-08-01 07:46:42.418785"]]
+  [1m[36mTRANSACTION (91.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 2]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.3ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 0], ["question_id", 2], ["created_at", "2021-08-01 07:46:42.523223"], ["updated_at", "2021-08-01 07:46:42.523223"]]
+  [1m[36mTRANSACTION (97.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 2]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.3ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 0], ["question_id", 2], ["created_at", "2021-08-01 07:46:42.630790"], ["updated_at", "2021-08-01 07:46:42.630790"]]
+  [1m[36mTRANSACTION (101.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTestUser Create (0.4ms)[0m  [1m[32mINSERT INTO "test_users" ("user_id", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 1], ["test_id", 1], ["created_at", "2021-08-01 07:46:42.756732"], ["updated_at", "2021-08-01 07:46:42.756732"]]
+  [1m[36mTRANSACTION (107.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTestUser Create (0.4ms)[0m  [1m[32mINSERT INTO "test_users" ("user_id", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 1], ["test_id", 2], ["created_at", "2021-08-01 07:46:42.878190"], ["updated_at", "2021-08-01 07:46:42.878190"]]
+  [1m[36mTRANSACTION (117.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTestUser Create (0.3ms)[0m  [1m[32mINSERT INTO "test_users" ("user_id", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 3], ["test_id", 3], ["created_at", "2021-08-01 07:46:43.007472"], ["updated_at", "2021-08-01 07:46:43.007472"]]
+  [1m[36mTRANSACTION (108.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTestUser Create (0.3ms)[0m  [1m[32mINSERT INTO "test_users" ("user_id", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["test_id", 4], ["created_at", "2021-08-01 07:46:43.131151"], ["updated_at", "2021-08-01 07:46:43.131151"]]
+  [1m[36mTRANSACTION (119.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "test_users"."test_id" = "tests"."id" WHERE "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["level", 1], ["user_id", 1], ["LIMIT", 11]]
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "test_users"."test_id" = "tests"."id" WHERE "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["level", 2], ["user_id", 1], ["LIMIT", 11]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "test_users"."test_id" = "tests"."id" WHERE "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["level", 1], ["user_id", 2], ["LIMIT", 11]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ?[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (101.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (119.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTests (20210721080909)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_cda342dc0a"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_category_id" ON "tests" ("category_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721080909"]]
+  [1m[36mTRANSACTION (127.7ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateQuestions (20210721080935)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "questions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "body" varchar NOT NULL, "test_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_cb4b358d50"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_questions_on_test_id" ON "questions" ("test_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721080935"]]
+  [1m[36mTRANSACTION (121.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateAnswers (20210721081006)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "answers" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "correct" boolean, "question_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_3d5ed4418f"
+FOREIGN KEY ("question_id")
+  REFERENCES "questions" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_answers_on_question_id" ON "answers" ("question_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721081006"]]
+  [1m[36mTRANSACTION (135.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20210721081020)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721081020"]]
+  [1m[36mTRANSACTION (147.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateCategories (20210721081045)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210721081045"]]
+  [1m[36mTRANSACTION (130.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateTestUsers (20210726152811)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "test_users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "test_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_9cdf97435d"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_62a50a0902"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_test_users_on_user_id" ON "test_users" ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_test_users_on_test_id" ON "test_users" ("test_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210726152811"]]
+  [1m[36mTRANSACTION (143.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserIdToTest (20210728141933)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atests_on_category_id" ON "atests" ("category_id")[0m
+  [1m[35m (1.4ms)[0m  [1m[32mINSERT INTO "atests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "tests"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "tests"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "fk_rails_cda342dc0a"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_category_id" ON "tests" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "tests" ("id","title","level","category_id","created_at","updated_at")
+                     SELECT "id","title","level","category_id","created_at","updated_at" FROM "atests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_user_id" ON "tests" ("user_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atests_on_user_id" ON "atests" ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atests_on_category_id" ON "atests" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "atests" ("id","title","level","category_id","created_at","updated_at","user_id")
+                     SELECT "id","title","level","category_id","created_at","updated_at","user_id" FROM "tests"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "tests"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "tests" ("id" integer NOT NULL PRIMARY KEY, "title" varchar NOT NULL, "level" integer DEFAULT 1, "category_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "fk_rails_cda342dc0a"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+, CONSTRAINT "fk_rails_e0c5eb5e4a"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_tests_on_category_id" ON "tests" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_tests_on_user_id" ON "tests" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "tests" ("id","title","level","category_id","created_at","updated_at","user_id")
+                     SELECT "id","title","level","category_id","created_at","updated_at","user_id" FROM "atests"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atests"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210728141933"]]
+  [1m[36mTRANSACTION (138.9ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddEmailToUser (20210730141638)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "email" varchar[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210730141638"]]
+  [1m[36mTRANSACTION (166.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-08-01 12:30:07.527807"], ["updated_at", "2021-08-01 12:30:07.527807"]]
+  [1m[36mTRANSACTION (88.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Rails.Интерфейс запросов Active Record"], ["created_at", "2021-08-01 12:30:13.942653"], ["updated_at", "2021-08-01 12:30:13.942653"]]
+  [1m[36mTRANSACTION (81.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.2ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Ruby"], ["created_at", "2021-08-01 12:30:14.029150"], ["updated_at", "2021-08-01 12:30:14.029150"]]
+  [1m[36mTRANSACTION (72.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "SQL"], ["created_at", "2021-08-01 12:30:14.107455"], ["updated_at", "2021-08-01 12:30:14.107455"]]
+  [1m[36mTRANSACTION (93.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mCategory Create (0.3ms)[0m  [1m[32mINSERT INTO "categories" ("title", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["title", "Rest"], ["created_at", "2021-08-01 12:30:14.207624"], ["updated_at", "2021-08-01 12:30:14.207624"]]
+  [1m[36mTRANSACTION (74.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ger@mail.ru"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES (?, ?, ?, ?)[0m  [["name", "Gerrard"], ["created_at", "2021-08-01 12:30:14.310118"], ["updated_at", "2021-08-01 12:30:14.310118"], ["email", "ger@mail.ru"]]
+  [1m[36mTRANSACTION (119.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "fill@mail.ru"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES (?, ?, ?, ?)[0m  [["name", "Fill"], ["created_at", "2021-08-01 12:30:14.440074"], ["updated_at", "2021-08-01 12:30:14.440074"], ["email", "fill@mail.ru"]]
+  [1m[36mTRANSACTION (122.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "saka@mail.ru"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES (?, ?, ?, ?)[0m  [["name", "Saka"], ["created_at", "2021-08-01 12:30:14.571806"], ["updated_at", "2021-08-01 12:30:14.571806"], ["email", "saka@mail.ru"]]
+  [1m[36mTRANSACTION (123.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "son@mail.ru"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at", "email") VALUES (?, ?, ?, ?)[0m  [["name", "Son"], ["created_at", "2021-08-01 12:30:14.706921"], ["updated_at", "2021-08-01 12:30:14.706921"], ["email", "son@mail.ru"]]
+  [1m[36mTRANSACTION (119.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tests" WHERE "tests"."title" = ? AND "tests"."title" = ? AND "tests"."level" = ? LIMIT ?[0m  [["title", "Rails"], ["title", "Rails"], ["level", 4], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.2ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? ORDER BY "categories"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("title", "level", "category_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Rails"], ["level", 4], ["category_id", 1], ["created_at", "2021-08-01 12:30:14.881949"], ["updated_at", "2021-08-01 12:30:14.881949"], ["user_id", 1]]
+  [1m[36mTRANSACTION (90.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tests" WHERE "tests"."title" = ? AND "tests"."title" = ? AND "tests"."level" = ? LIMIT ?[0m  [["title", "Rail"], ["title", "Rail"], ["level", 4], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? ORDER BY "categories"."title" ASC LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("title", "level", "category_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Rail"], ["level", 4], ["category_id", 1], ["created_at", "2021-08-01 12:30:14.995311"], ["updated_at", "2021-08-01 12:30:14.995311"], ["user_id", 2]]
+  [1m[36mTRANSACTION (130.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "tests" WHERE "tests"."title" = ? AND "tests"."title" = ? AND "tests"."level" = ? LIMIT ?[0m  [["title", "Ruby"], ["title", "Ruby"], ["level", 2], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? ORDER BY "categories"."title" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("title", "level", "category_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["title", "Ruby"], ["level", 2], ["category_id", 2], ["created_at", "2021-08-01 12:30:15.144724"], ["updated_at", "2021-08-01 12:30:15.144724"], ["user_id", 3]]
+  [1m[36mTRANSACTION (106.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tests" WHERE "tests"."title" = ? AND "tests"."title" = ? AND "tests"."level" = ? LIMIT ?[0m  [["title", "SQL"], ["title", "SQL"], ["level", 1], ["LIMIT", 1]]
+  [1m[36mCategory Load (0.1ms)[0m  [1m[34mSELECT "categories".* FROM "categories" WHERE "categories"."id" = ? ORDER BY "categories"."title" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("title", "category_id", "created_at", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?)[0m  [["title", "SQL"], ["category_id", 3], ["created_at", "2021-08-01 12:30:15.265465"], ["updated_at", "2021-08-01 12:30:15.265465"], ["user_id", 4]]
+  [1m[36mTRANSACTION (87.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mQuestion Create (0.3ms)[0m  [1m[32mINSERT INTO "questions" ("body", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Как вывести список всех Тестов,которые проходит или когда-либо проходил Пользователь"], ["test_id", 1], ["created_at", "2021-08-01 12:30:15.374402"], ["updated_at", "2021-08-01 12:30:15.374402"]]
+  [1m[36mTRANSACTION (85.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mQuestion Create (0.5ms)[0m  [1m[32mINSERT INTO "questions" ("body", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "Вывести название всех тестов с определенной категории"], ["test_id", 2], ["created_at", "2021-08-01 12:30:15.472110"], ["updated_at", "2021-08-01 12:30:15.472110"]]
+  [1m[36mTRANSACTION (84.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mQuestion Create (0.3ms)[0m  [1m[32mINSERT INTO "questions" ("body", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "как объеденить с помощью joins"], ["test_id", 4], ["created_at", "2021-08-01 12:30:15.569880"], ["updated_at", "2021-08-01 12:30:15.569880"]]
+  [1m[36mTRANSACTION (98.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mQuestion Create (0.4ms)[0m  [1m[32mINSERT INTO "questions" ("body", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["body", "как объеденить с помощью joins"], ["test_id", 3], ["created_at", "2021-08-01 12:30:15.683604"], ["updated_at", "2021-08-01 12:30:15.683604"]]
+  [1m[36mTRANSACTION (94.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.2ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 1]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.3ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 1], ["question_id", 1], ["created_at", "2021-08-01 12:30:15.812233"], ["updated_at", "2021-08-01 12:30:15.812233"]]
+  [1m[36mTRANSACTION (90.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 1]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.3ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 0], ["question_id", 1], ["created_at", "2021-08-01 12:30:15.915326"], ["updated_at", "2021-08-01 12:30:15.915326"]]
+  [1m[36mTRANSACTION (75.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 1]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.3ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 1], ["question_id", 1], ["created_at", "2021-08-01 12:30:16.003967"], ["updated_at", "2021-08-01 12:30:16.003967"]]
+  [1m[36mTRANSACTION (99.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 2]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.4ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 0], ["question_id", 2], ["created_at", "2021-08-01 12:30:16.120856"], ["updated_at", "2021-08-01 12:30:16.120856"]]
+  [1m[36mTRANSACTION (93.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 2]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.3ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 0], ["question_id", 2], ["created_at", "2021-08-01 12:30:16.227168"], ["updated_at", "2021-08-01 12:30:16.227168"]]
+  [1m[36mTRANSACTION (97.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mQuestion Load (0.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions" WHERE "questions"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "answers" WHERE "answers"."question_id" = ?[0m  [["question_id", 2]]
+  ↳ app/models/answer.rb:12:in `validate_max_answer'
+  [1m[36mAnswer Create (0.3ms)[0m  [1m[32mINSERT INTO "answers" ("correct", "question_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["correct", 0], ["question_id", 2], ["created_at", "2021-08-01 12:30:16.338290"], ["updated_at", "2021-08-01 12:30:16.338290"]]
+  [1m[36mTRANSACTION (98.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTestUser Create (0.4ms)[0m  [1m[32mINSERT INTO "test_users" ("user_id", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 1], ["test_id", 1], ["created_at", "2021-08-01 12:30:16.452527"], ["updated_at", "2021-08-01 12:30:16.452527"]]
+  [1m[36mTRANSACTION (111.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTestUser Create (0.3ms)[0m  [1m[32mINSERT INTO "test_users" ("user_id", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 1], ["test_id", 2], ["created_at", "2021-08-01 12:30:16.578741"], ["updated_at", "2021-08-01 12:30:16.578741"]]
+  [1m[36mTRANSACTION (96.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTestUser Create (0.4ms)[0m  [1m[32mINSERT INTO "test_users" ("user_id", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 3], ["test_id", 3], ["created_at", "2021-08-01 12:30:16.687890"], ["updated_at", "2021-08-01 12:30:16.687890"]]
+  [1m[36mTRANSACTION (97.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTestUser Create (0.4ms)[0m  [1m[32mINSERT INTO "test_users" ("user_id", "test_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["user_id", 2], ["test_id", 4], ["created_at", "2021-08-01 12:30:16.801121"], ["updated_at", "2021-08-01 12:30:16.801121"]]
+  [1m[36mTRANSACTION (129.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "test_users"."test_id" = "tests"."id" WHERE "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["level", 1], ["user_id", 2], ["LIMIT", 11]]
+  [1m[36mTest Load (0.6ms)[0m  [1m[34mSELECT "tests".* FROM "tests" join test_users on tests.id = test_users.test_id WHERE "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["level", 1], ["user_id", 2], ["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "tests"."id" = "test_users"."test_id" WHERE "test_users"."user_id" = ? AND "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["level", 1], ["user_id", 2], ["LIMIT", 11]]
+  [1m[36mTest Load (0.5ms)[0m  [1m[34mSELECT "tests".* FROM "tests" join test_users on tests.id = test_users.test_id WHERE "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["level", 1], ["user_id", 2], ["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "tests"."id" = "test_users"."test_id" WHERE "test_users"."user_id" = ? AND "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["level", 1], ["user_id", 2], ["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "tests"."id" = "test_users"."test_id" WHERE "test_users"."user_id" = ? AND "tests"."level" = ? AND "tests"."id" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["level", 1], ["id", 2], ["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTestUser Load (0.2ms)[0m  [1m[34mSELECT "test_users".* FROM "test_users" WHERE "test_users"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTestUser Load (0.2ms)[0m  [1m[34mSELECT "test_users".* FROM "test_users" WHERE "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTestUser Load (0.2ms)[0m  [1m[34mSELECT "test_users".* FROM "test_users" WHERE "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "tests"."id" = "test_users"."test_id" WHERE "test_users"."user_id" = ? AND "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["level", 1], ["user_id", 2], ["LIMIT", 11]]
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" join test_users on tests.id = test_users.test_id WHERE "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["level", 1], ["user_id", 2], ["LIMIT", 11]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "tests"."id" = "test_users"."test_id" WHERE "test_users"."user_id" = ? AND "tests"."level" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["level", 1], ["LIMIT", 11]]
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" join test_users on tests.id = test_users.test_id WHERE "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["level", 1], ["user_id", 2], ["LIMIT", 11]]
+  [1m[36mTest Load (0.4ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "test_users"."test_id" = "tests"."id" WHERE "tests"."level" = ? AND "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["level", 1], ["user_id", 2], ["LIMIT", 11]]
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "tests"."id" = "test_users"."test_id" WHERE "test_users"."user_id" = ? AND "tests"."level" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["level", 1], ["LIMIT", 11]]
+  [1m[36mTest Load (0.5ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "tests"."id" = "test_users"."test_id" WHERE "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["LIMIT", 11]]
+  [1m[36mTestUser Load (0.4ms)[0m  [1m[34mSELECT "test_users".* FROM "test_users" WHERE "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["LIMIT", 11]]
+  [1m[36mTest Load (0.4ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Load (0.5ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["LIMIT", 11]]
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" INNER JOIN "test_users" ON "tests"."id" = "test_users"."test_id" WHERE "test_users"."user_id" = ? /* loading for inspect */ LIMIT ?[0m  [["user_id", 2], ["LIMIT", 11]]
