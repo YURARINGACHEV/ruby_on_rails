@@ -1,5 +1,3 @@
-# У одного Вопроса может быть от 1-го до 4-х ответов.
-
 class Answer < ApplicationRecord
 
   belongs_to :question

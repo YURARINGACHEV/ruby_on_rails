@@ -22,8 +22,8 @@ class Test < ApplicationRecord
 
   scope :join_category_test, -> (title)  { self.joins(:category).where(categories: { title: title }) }  
 
-  def self.order_mas_title
-    join_category_test.order(title: :DESC).pluck('tests.title')
+  def self.order_mas_title(title)
+    join_category_test(title).order(title: :DESC).pluck('tests.title')
   end
 
 end

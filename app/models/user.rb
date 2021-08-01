@@ -11,10 +11,6 @@ class User < ApplicationRecord
   def show_list_test(level)
     tests.where(level: level)
   end
-
-  # def show_list_test_1(level)
-  #   Test.joins('join test_users on tests.id = test_users.test_id').where(tests: { level: level }).where(test_users: {user_id: self.id})
-  # end
-
+  
 end
 
