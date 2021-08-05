@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   # get "tests/:id", to: 'questions#show'
   
   resources :tests do 
-    resources :questions
+    resources :questions, shallow: true
   end
 
 

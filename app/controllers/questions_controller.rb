@@ -1,36 +1,45 @@
 class QuestionsController < ApplicationController
 
-  before_action :find_test
+  before_action :find_test, only: %i[create]
+  before_action :find_question, only: %i[show]
 
   rescue_from ActiveRecord::RecordNotFound, with: :rescue_with_question_not_found
 
   def index
-    render json: { questions: Question.all }
+    render json: { questions: Test.find(params[:test_id]).questions }
   end
 
   def show
-    render inline '<%=test.title%>'
+    render json: { questions: @question}
   end
 
   def new
   end
 
   def create
-    question = Question.create(question_params)
+    question = @test.questions.create(question_params)
 
-    render plain: question.inspect
-
+    if question.save
+      redirect_to question
+      # render plain: question.inspect
+    else
+      render :new, status: :unprocessable_entity
+      # render plain: "Невалидные данные"
+    end
   end
 
   def destroy
-    @question = Question.find(params[:id])
     @question.destroy    
   end
 
   private
+
+  def find_question
+    @question = Question.find(params[:id])
+  end
   
   def find_test
-    @test = Test.find(params[:id])
+    @test = Test.find(params[:test_id])
   end
 
   def question_params
