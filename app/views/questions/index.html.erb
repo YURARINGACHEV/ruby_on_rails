@@ -1,0 +1,9 @@
+<% if @questions.present? %>
+  <h2>List questions:</h2> 
+  <%= @questions.each do |question| %>
+    <p><%= question.body%></p>
+  <%end%>
+
+<%else%>
+  <p>You have not question at this moment</p>
+<%end%>
