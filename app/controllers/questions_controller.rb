@@ -7,11 +7,11 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = @test.questions 
-    @test 
+   
   end
 
   def show
-   @question
+
   end
 
   def new
@@ -29,11 +29,9 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @question
   end
 
   def update
-    @question
     if @question.update(question_params)
       redirect_to @question
     else
@@ -43,7 +41,7 @@ class QuestionsController < ApplicationController
   
   def destroy
     @question.destroy    
-    redirect_to test_questions_path
+    redirect_to test_questions_path(@question.test_id)
   end
 
   private
@@ -57,7 +55,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:body, :test_id)
+    params.require(:question).permit(:body)
   end
 
   def rescue_with_question_not_found

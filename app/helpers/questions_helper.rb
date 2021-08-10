@@ -1,13 +1,17 @@
 module QuestionsHelper
 
-  def data_now
-  	 Time.now.strftime("%m/%d/%Y")
-  end
-# нужно сделать метод, который принимает два значения в себя и возвращает link_to
-# Для формирования ссылки на GitHub репозиторий: github_url(author, repo)
-  def question_header(author, repo)
-    link_to "author", "https://github.com/YURARINGACHEV", "repo", "https://github.com/YURARINGACHEV/ruby_on_rails"
-    link_to "repo", "https://github.com/YURARINGACHEV/ruby_on_rails"
+# Для заголовка формы создания и редактирования вопроса. Это должен быть 
+# один метод question_header который в форме создания вопроса будет выводить 
+# Create New <Test Title> Question, а в форме редактирования Edit <Test Title> Question
+# ну, в этом и есть смысл метода, чтобы понять как проверить)
+  def question_header(test_title)
+    if @questions.present?
+      "Create New <#{test_title}> Question"
+    else 
+      "Edit <#{test_title}> Question"
+    end
+        
+    
   end
 
 end
