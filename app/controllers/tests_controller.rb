@@ -5,7 +5,7 @@ class TestsController < ApplicationController
   before_action :find_user, only: :start 
 
   def index
-  	@tests = Test.all
+
   end
 
   def show

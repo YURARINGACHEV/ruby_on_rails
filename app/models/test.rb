@@ -4,9 +4,9 @@ class Test < ApplicationRecord
 
   validates :title, presence: true, uniqueness: { scope: [:title, :level] }
 
-  belongs_to :category, optional: true
+  belongs_to :category
 
-  belongs_to :author, class_name: "User", foreign_key: :user_id, optional: true
+  belongs_to :author, class_name: "User", foreign_key: :user_id
 
   has_many :questions
 

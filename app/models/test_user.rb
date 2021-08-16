@@ -1,5 +1,7 @@
 class TestUser < ApplicationRecord
 
+  SUCCES_RATE = 85
+
   belongs_to :user
   belongs_to :test
   belongs_to :current_question, class_name: "Question", optional: true
@@ -24,12 +26,12 @@ class TestUser < ApplicationRecord
   end
 
   def success_rate?
-    percentage_result >= 85   
+    percentage_result >= SUCCES_RATE  
     
   end
   
   def index_question
-    test.questions.find_index(self.current_question) + 1
+    test.questions.index(current_question) + 1
   end
 
   private
