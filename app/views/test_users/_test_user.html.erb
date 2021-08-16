@@ -1,0 +1,9 @@
+<% if @test_user.success_rate? %>
+      <h2 style="color:#00ff00">Ваш результат: <%= @test_user.percentage_result %> %</h2>
+      <p style="color:#00ff00">Вы успешно прошли тест</p>
+
+
+<% else  %>
+	<h2 style="color:#ff0000">Ваш результат: <%= @test_user.percentage_result %> %</h2>
+      <p style="color:#ff0000">Вы не прошли тест</p>
+  <%end%>

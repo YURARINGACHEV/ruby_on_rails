@@ -3,5 +3,13 @@
 	<%=@question.body%>
 </p>
 
- <%= link_to 'Edit', edit_question_path(@question) %> | 
- <%= link_to 'Back', test_questions_path(@question.test_id) %>
+<h2>Answer</h2>
+
+<%= link_to 'New_answer', new_question_answer_path(@question) %>
+
+<ol>
+	<%= render @question.answers %>
+</ol>
+
+ <%= link_to 'Edit question', edit_question_path(@question) %> | 
+ <%= link_to 'Back test', test_path(@question.test) %>

@@ -1,0 +1,8 @@
+<h1>The <%= @test_user.test.title %> Test was Completed!</h1>
+
+<p>  Количество равильных ответов: <%= @test_user.correct_questions%></p>
+
+<p><%= @test_user.percentage_result %></p>
+
+<p><%= render @test_user %></p>
+<%= link_to 'Back test', tests_path(@test_user.test) %>

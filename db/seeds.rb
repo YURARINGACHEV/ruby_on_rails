@@ -32,12 +32,12 @@ questions = Question.create!([{body: "Как вывести список все�
                              {body: "как объеденить с помощью joins", test_id: tests[2].id}])
  
 
-answers = Answer.create!([{correct: true, question_id: questions[0].id},
-                         {correct: false, question_id: questions[0].id},
-                         {correct: true, question_id: questions[0].id},
-                         {correct: false, question_id: questions[1].id},
-                         {correct: false, question_id: questions[1].id},
-                         {correct: false, question_id: questions[1].id}])
+answers = Answer.create!([{correct: true, question_id: questions[0].id, body: "an1"},
+                         {correct: false, question_id: questions[0].id, body: "an2"},
+                         {correct: true, question_id: questions[0].id, body: "an3"},
+                         {correct: false, question_id: questions[1].id, body: "an4"},
+                         {correct: false, question_id: questions[1].id, body: "an5"},
+                         {correct: false, question_id: questions[1].id, body: "an6"}])
 
 test_users = TestUser.create!([{user_id: users[0].id, test_id: tests[0].id},
                               {user_id: users[0].id, test_id: tests[1].id},
