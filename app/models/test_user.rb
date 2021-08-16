@@ -1,6 +1,6 @@
 class TestUser < ApplicationRecord
 
-  SUCCES_RATE = 85
+  SUCCESS_RATE = 85
 
   belongs_to :user
   belongs_to :test
@@ -26,7 +26,7 @@ class TestUser < ApplicationRecord
   end
 
   def success_rate?
-    percentage_result >= SUCCES_RATE  
+    percentage_result >= SUCCESS_RATE  
     
   end
   
