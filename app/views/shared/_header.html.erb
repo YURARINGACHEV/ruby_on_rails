@@ -1,0 +1,21 @@
+<header>
+  <div class="nav user">
+
+        <%= link_to 'Create test', new_test_path %> | 
+    <%= link_to 'TestGuru_main', root_path %>
+  </div> 
+  <div class="nav user">
+    <% if logged_in? %>
+      
+      <%= link_to 'Test list', tests_path %> | 
+      <%= link_to 'Create test', new_test_path %> | 
+      <%= link_to 'Exit', logout_path, method: :delete %>
+      
+      <p >Welcome, <b><%= current_user.email %></b> Guru!</p>
+    <% else %>
+       
+      <%= link_to 'Sign up', signup_path %> |
+      <%= link_to 'Sign in', login_path %>
+        
+    <% end %>
+  </div> 
