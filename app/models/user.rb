@@ -14,8 +14,6 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :email, presence: true, uniqueness: true, format: { with: EMAIL }
-  # validates :password, presence: true, if: Proc.new { |u| u.password_digest.blank? }
-  # validates :password, confirmation: true
 
   def show_list_test(level)
     tests.where(level: level)

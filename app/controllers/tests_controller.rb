@@ -3,7 +3,6 @@ class TestsController < ApplicationController
   before_action :authenticate_user!
   before_action :all_test, only: [:index] 
   before_action :find_test, only: [:show, :edit, :update, :destroy, :start]
-  before_action :find_user, only: :start 
 
   def index
 
@@ -46,8 +45,8 @@ class TestsController < ApplicationController
   end
 
   def start
-    @current_user.tests.push(@test)
-    redirect_to @current_user.test_user(@test)
+    current_user.tests.push(@test)
+    redirect_to current_user.test_user(@test)
   end
 
   private
