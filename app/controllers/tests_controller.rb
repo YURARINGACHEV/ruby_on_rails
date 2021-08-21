@@ -63,8 +63,4 @@ class TestsController < ApplicationController
     params.require(:test).permit(:title, :level, :category_id, :user_id )
   end
 
-  def find_user
-    @user = User.first
-  end
-
 end
