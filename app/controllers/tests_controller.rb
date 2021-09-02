@@ -2,47 +2,47 @@ class TestsController < ApplicationController
   
   before_action :authenticate_user!
   before_action :all_test, only: [:index] 
-  before_action :find_test, only: [:show, :edit, :update, :destroy, :start]
+  before_action :find_test, only: [:start]
 
   def index
 
   end
 
-  def show
+  # def show
   
-  end
+  # end
  
-  def new
-    @test = Test.new
-  end
+  # def new
+  #   @test = Test.new
+  # end
 
-  def create
-    @test = Test.new(test_params)
+  # def create
+  #   @test = Test.new(test_params)
 
-    if @test.save
-      redirect_to @test
-    else
-      render :new
-    end
-  end
+  #   if @test.save
+  #     redirect_to @test
+  #   else
+  #     render :new
+  #   end
+  # end
 
-  def edit
+  # def edit
 
-  end
+  # end
 
-  def update
+  # def update
  
-    if @test.update(test_params)
-      redirect_to @test
-    else
-      render :edit
-    end
-  end
+  #   if @test.update(test_params)
+  #     redirect_to @test
+  #   else
+  #     render :edit
+  #   end
+  # end
   
-  def destroy
-    @test.destroy    
-    redirect_to tests_path
-  end
+  # def destroy
+  #   @test.destroy    
+  #   redirect_to tests_path
+  # end
 
   def start
     current_user.tests.push(@test)
@@ -59,8 +59,8 @@ class TestsController < ApplicationController
     @test = Test.find(params[:id])
   end
 
-  def test_params
-    params.require(:test).permit(:title, :level, :category_id, :user_id )
-  end
+  # def test_params
+  #   params.require(:test).permit(:title, :level, :category_id, :user_id )
+  # end
 
 end
