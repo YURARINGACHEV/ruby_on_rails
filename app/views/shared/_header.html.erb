@@ -1,15 +1,15 @@
 <header>
   <div class="nav user">
  
-    <%= link_to 'TestGuru_main', root_path %>
+    <%= link_to t(".header"), root_path %>
   </div> 
   <div class="nav user">
     <% if user_signed_in? %>
       
 
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+      <%= link_to t(".logout"), destroy_user_session_path, method: :delete %>
       
-      <p >Welcome, <b><%= current_user.email %></b> Guru!</p>
+      <p ><%= t(".welcome", user: current_user.email  ) %></p>
  
         
     <% end %>

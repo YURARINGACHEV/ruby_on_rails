@@ -1,6 +1,6 @@
-<h1>The <%= @test_user.test.title %> Test was Completed!</h1>
+<h1><%= t(".header", title: @test_user.test.title) %></h1>
 
-<p>  Количество равильных ответов: <%= @test_user.correct_questions%></p>
+<p>  Количество правильных ответов: <%= @test_user.correct_questions%></p>
 
 <p><%= @test_user.percentage_result %></p>
 
