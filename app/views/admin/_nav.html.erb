@@ -1,22 +1,20 @@
-<header>
-  <div class="nav nav-admin">
-    <span class="nav-admin title"><%= t(".header") %></span>
+<nav class="navbar navbar-light by-light">
+  <span class: 'navbar-brand'><%= t(".header") %></span>
   
-
-  <div class="nav-admin user">
+  <span class="navbar-text">
     <% if user_signed_in? %>
       
       <%= link_to t(".test_list"), admin_tests_path %> | 
       <%= link_to t(".create_test"), new_admin_test_path %> | 
       <%= link_to t(".exit"), destroy_user_session_path, method: :delete %><br>
       
-      <%= t(".welcome", user: current_user.email ) %> 
+      <%= t(".welcome", user: current_user.type ) %> 
     <% else %>
        
       <%= link_to 'Sign up', signup_path %> |
       <%= link_to 'Sign in', login_path %>
 
     <% end %>
-  </div> 
-  </div> 
-</header>
+  </span> 
+  </nav> 
+

@@ -1,6 +1,6 @@
-<footer>
 
-  <p><%= t(".author") %>: <%=github_url("YURARINGACHEV", "https://github.com/YURARINGACHEV/ruby_on_rails")%></p>
-  <a href="https://thinknetica.com", target="_blank">Учебный проект в онлайн-школе Thinknetica</a><br>
-  <p><%=data_now%></p>
-</footer>
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <span class=' navbar-nav' ><%= t(".author") %>: <%=github_url("YURARINGACHEV", "https://github.com/YURARINGACHEV/ruby_on_rails")%>
+  <a href="https://thinknetica.com", target="_blank", class="navbar-brand">Учебный проект в онлайн-школе Thinknetica</a></span><br>
+  <%=data_now%>
+</nav>

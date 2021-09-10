@@ -70,6 +70,8 @@ en:
       header: "TestGuru_main"
       logout: "logout"
       welcome: "Welcom %{user} Guru!"
+      log_in: "Log in"
+      sign_up: "Sign up"
 
   layouts:
     admin:

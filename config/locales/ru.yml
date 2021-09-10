@@ -21,6 +21,7 @@ ru:
         many: "Обнаружено %{count} ошибок"
         one: "Обнаружена %{count} ошибка"
         other: "Обнаружено %{count} ошибки"
+   
 
   test_users:
     result:
@@ -72,6 +73,8 @@ ru:
       header: "Главная Тест Гуру"
       logout: "выход"
       welcome: "Приветствую %{user} Гуру!"
+      log_in: "Войти"
+      sign_up: "Зарегистрироваться"
 
   
 

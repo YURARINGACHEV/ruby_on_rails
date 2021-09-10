@@ -10,10 +10,11 @@
 
   <body>
     <%=render 'admin/nav'%> 
-    
+    <div class="container">
     <%= render 'shared/flash' %>
 
     <%= yield %>
+  </div>
     <%=render 'shared/footer'%>
   </body>
 </html>
