@@ -26,6 +26,9 @@ ru:
   test_users:
     result:
       header: "Тест %{title} успешно пройден!"
+    gist: 
+      success: "Gist успешно сохранен!"
+      failure: "Во время сохранения gist произошла ошибка!"
 
   tests:
     index:

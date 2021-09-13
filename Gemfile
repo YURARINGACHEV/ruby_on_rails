@@ -25,11 +25,18 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
-#Auth
+# octokit github
+gem "octokit", "~> 4.0"
+
+# Auth
 
 gem 'devise', '~> 4.0'
 
-#LOCALIZATION
+# NETWORKING
+
+gem 'faraday'
+
+# LOCALIZATION
 
 gem 'rails-i18n'
 

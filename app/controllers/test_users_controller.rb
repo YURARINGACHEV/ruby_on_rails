@@ -2,7 +2,7 @@
 class TestUsersController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :set_test_user, only: %i[update show result]
+  before_action :set_test_user, only: %i[update show result gist]
 
   def show
   end
@@ -19,6 +19,20 @@ class TestUsersController < ApplicationController
     else
       render :show
     end
+  end
+
+ def gist
+    result = GistQuestionService.new(@test_user.current_question).call
+
+    flash_options = if result.success?
+       { notice: t('.success') }
+      
+    else
+      { alert: t(".failure") }
+    end
+
+    redirect_to @test_user, flash_options
+    
   end
 
   private

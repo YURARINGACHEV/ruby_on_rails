@@ -1,11 +1,11 @@
 <h1>Passing the <%= @test_user.test.title %> Test</h1>
 <p>Всего вопросов <%= @test_user.test.questions.count %> </p>
 
-
-<b>
-	№ <%= @test_user.index_question%> <%= @test_user.current_question.body %>
-</b>
-
+<p>
+  <b>
+	 № <%= @test_user.index_question%> <%= @test_user.current_question.body %>
+  </b>
+</p>
 <%= form_with url: test_user_path(@test_user), local: true, method: :put do |form| %>
   <%= form.collection_check_boxes :answer_ids, @test_user.current_question.answers, :id, :body, include_hidden: false do |b| %>
     <p>
@@ -14,6 +14,7 @@
 
     </p>
   <%end%>
+  <p><%= link_to 'Gist Question', gist_test_user_path(@test_user), method: :post %></p>
   <p><%= form.submit "Next" %></p>
 
 <% end %>
