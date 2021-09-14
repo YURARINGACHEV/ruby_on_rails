@@ -56,13 +56,14 @@ en:
     new:
       header: "New test"
       back: "Back"
-
+    
     nav:
       header: "TestGuru Admin panel"
       test_list: "Test list"
       create_test: "Create test"
       exit: "Exit"
       welcome: "Welcom %{user} Guru!"
+
   tests_mailer:
     completed_test:
       subject: "You just completed the TesrGuru test!"
@@ -80,9 +81,6 @@ en:
   layouts:
     admin:
       header: "Admin panel | TestGuru"
-
-
-
 
 
 
