@@ -26,7 +26,7 @@ class TestUsersController < ApplicationController
     result.call
 
     flash_options = if result.success?
-      gist = current_user.gists.create(gist_url: response.url, question: @test_passage.current_question)
+      gist = current_user.gists.create(gist_url: result.url, question: @test_user.current_question)
        { notice: t('.success') }
       
     else

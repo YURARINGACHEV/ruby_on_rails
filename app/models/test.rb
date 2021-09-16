@@ -8,9 +8,9 @@ class Test < ApplicationRecord
 
   belongs_to :author, class_name: "User", foreign_key: :user_id
 
-  has_many :questions
+  has_many :questions, dependent: :destroy
 
-	has_many :test_users
+	has_many :test_users,dependent: :destroy
 
   has_many :users, through: :test_users
 

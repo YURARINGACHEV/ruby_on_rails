@@ -6,7 +6,7 @@ class GistQuestionService
   def initialize(question, client: nil)
   	@question = question
   	@test = @question.test
-  	@client = client || Octokit::Client.new(access_token: "#{ACCESS_TOKEN}")
+  	@client = client || Octokit::Client.new(access_token: ACCESS_TOKEN)
   end
 
   def call
@@ -14,7 +14,7 @@ class GistQuestionService
   end
   
   def url
-    @client.last_response.data[:gists_url]
+    @client.last_response.data[:html_url]
   end
 
   def success?

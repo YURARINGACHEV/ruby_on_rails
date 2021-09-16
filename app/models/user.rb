@@ -8,10 +8,10 @@ class User < ApplicationRecord
          :validatable, 
          :confirmable
 
-  has_many :author_tests, class_name: "Test", foreign_key: :user_id
-  has_many :test_users
+  has_many :author_tests, class_name: "Test", foreign_key: :user_id, dependent: :destroy
+  has_many :test_users, dependent: :destroy
   has_many :tests, through: :test_users
-  has_many :gists
+  has_many :gists, dependent: :destroy
 
   def show_list_test(level)
     tests.where(level: level)
