@@ -11,13 +11,14 @@
       <div class="form-group">
         <p>
           <%= f.label :email, t(".email") %>
-          <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Enter email" %>
+          <%= f.email_field :email, autofocus: true, class: 'form-control pointer', placeholder: "Enter email" %>
         </p>
       
 
       <p>
         <%= f.label :password, t(".password") %>
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control  pointer ' %>
+           
       </p>
 
       <% if devise_mapping.rememberable? %>
@@ -29,7 +30,9 @@
         </div>
       <% end %>
 
-        <%= f.submit t(".enter"), class: 'btn btn-primary' %>
+        <%= f.submit t(".enter"), class: 'btn btn-primary ' %>
+   
+
       </div>
     <% end %>
   </div>

@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
-
+gem 'octicons_helper'
 # octokit github
 gem "octokit", "~> 4.0"
 

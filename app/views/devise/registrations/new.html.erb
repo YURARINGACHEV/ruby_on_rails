@@ -9,21 +9,27 @@
       <div class="form-group">
         <p>
           <%= f.label :email, t(".email") %><br />
-          <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Enter email" %>
+          <%= f.email_field :email, autofocus: true, class: 'form-control pointer', placeholder: "Enter email" %>
         </p>
+
         <p>
           <%= f.label :password, t(".password") %>
           <% if @minimum_password_length %>
             <em><%= t(".minimum_characters", count:@minimum_password_length) %></em>
           <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password",class: 'form-control' %>
+          <%= f.password_field :password, autocomplete: "new-password",class: 'form-control pointer '  %>
+
+          
         </p>
 
         <p>
           <%= f.label :password_confirmation, t(".password_confirmation") %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
-        </p>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control pointer' %>
 
+        <%= octicon 'check-circle-fill', class: 'text-success hide color-green' %>
+      <%= octicon 'x-circle-fill', class: 'text-success hide color-red' %>
+
+        </p>
 
         <div class="actions">
           <%= f.submit t(".sign_up"), class: 'btn btn-primary' %>
@@ -37,3 +43,4 @@
   </div>
 </div>
 </div>
+<%= javascript_pack_tag 'utilities/confirm_password.js' %>
