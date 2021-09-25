@@ -11,14 +11,17 @@ function passwordСonfirmation(){
   if (pass2 == ''){
     document.querySelector('.octicon-check-circle-fill').classList.add('hide')
     document.querySelector('.octicon-x-circle-fill').classList.add('hide')
+    return
   }
-   else if (pass1 == pass2){
+
+if (pass1 == pass2){
     document.querySelector('.octicon-check-circle-fill').classList.remove('hide')
     document.querySelector('.octicon-x-circle-fill').classList.add('hide')
   } else{
     document.querySelector('.octicon-check-circle-fill').classList.add('hide')
     document.querySelector('.octicon-x-circle-fill').classList.remove('hide')
   }
+  
 }
 
 
