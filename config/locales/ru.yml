@@ -57,6 +57,8 @@ ru:
       new:
         header: "Новый тест"
         back: "Назад"
+      form_inline:
+        submit: "OK"
 
     nav:
       header: "Панель администратора | Тест Гуру"

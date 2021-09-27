@@ -2,8 +2,8 @@ class Admin::TestsController < Admin::BaseController
 
   before_action :authenticate_user!
 
-  before_action :all_test, only: [:index] 
-  before_action :find_test, only: [:show, :edit, :update, :destroy, :start]
+  before_action :all_test, only: %i[index update_inline] 
+  before_action :find_test, only: [:show, :edit, :update, :destroy, :start, :update_inline]
 
   def index
 
@@ -38,6 +38,14 @@ class Admin::TestsController < Admin::BaseController
       redirect_to [:admin, @test]
     else
       render :edit
+    end
+  end
+
+  def update_inline
+    if @test.update(test_params)
+      redirect_to admin_tests_path
+    else
+      render :index
     end
   end
   

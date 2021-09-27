@@ -1,6 +1,13 @@
 <h1>Passing the <%= @test_user.test.title %> Test</h1>
 <p>Всего вопросов <%= @test_user.test.questions.count %> </p>
 
+<div class="progress ">
+  <%= content_tag :div, "progress",
+                    class: "progress-bar indicator-progress",
+                    data: { questions_count: @test_user.test.questions.count,
+                            questions_index: @test_user.index_question } %>
+</div>
+
 <p>
   <b>
 	 № <%= @test_user.index_question%> <%= @test_user.current_question.body %>
@@ -18,3 +25,4 @@
   <p><%= form.submit "Next" %></p>
 
 <% end %>
+<%= javascript_pack_tag 'utilities/indicator_progress.js' %>
