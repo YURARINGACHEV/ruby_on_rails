@@ -12,10 +12,10 @@ categories = Category.create!([{title: "Rails.Интерфейс запросо�
                               {title: 'Rest'}])
 
 
-users = User.create!([{name: "Gerrard", email: 'iorik@list.ru', password: '12345678', type: "Admin"},
-                     {name: "Fill", email: 'fill@mail.ru', password: '123456'},
-                     {name: "Saka", email: 'saka@mail.ru', password: '123456'},
-                     {name: 'Son', email: 'son@mail.ru'}, password: '123456'])
+users = User.create!([{name: "Gerrard", email: 'iorik@list.ru', password: '12345678', type: "Admin", first_name: 'oleg', last_name: 'zahariya'},
+                     {name: "Fill", email: 'fill@mail.ru', password: '123456', first_name: 'olga', last_name: 'kutukova'},
+                     {name: "Saka", email: 'saka@mail.ru', password: '123456', first_name: 'fedor', last_name: 'seregin'},
+                     {name: 'Son', email: 'son@mail.ru', password: '123456', first_name: 'petr', last_name: 'seregin'}])
 
 
 tests = Test.create!([{author: users[0], title: "Rails", level: "4", category_id: categories[0].id},
