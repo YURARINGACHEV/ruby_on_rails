@@ -6,16 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-categories = Category.create!([{title: "Rails.Интерфейс запросов Active Record"},
+categories = Category.create!([{title: "Rails"},
                               {title: "Ruby"},
                               {title: "SQL"},
                               {title: 'Rest'}])
 
 
-users = User.create!([{name: "Gerrard", email: 'iorik@list.ru', password: '12345678', type: "Admin", first_name: 'oleg', last_name: 'zahariya'},
-                     {name: "Fill", email: 'fill@mail.ru', password: '123456', first_name: 'olga', last_name: 'kutukova'},
-                     {name: "Saka", email: 'saka@mail.ru', password: '123456', first_name: 'fedor', last_name: 'seregin'},
-                     {name: 'Son', email: 'son@mail.ru', password: '123456', first_name: 'petr', last_name: 'seregin'}])
+users = User.create!([{name: "Gerrard", email: 'yura.ryngachev@gmail.com', password: '123456', type: "Admin", first_name: 'GuruAdmin', last_name: 'Gurov'},
+                     {name: "Lampard", email: 'iorik@list.ru', password: '123456', first_name: 'GuruUser', last_name: 'Testov'}])
 
 
 tests = Test.create!([{author: users[0], title: "Rails", level: "4", category_id: categories[0].id},
@@ -29,7 +27,7 @@ tests = Test.create!([{author: users[0], title: "Rails", level: "4", category_id
 questions = Question.create!([{body: "Как вывести список всех Тестов,которые проходит или когда-либо проходил Пользователь", test_id: tests[0].id},
                              {body: "Вывести название всех тестов с определенной категории", test_id: tests[1].id},
                              {body: "как объеденить с помощью joins", test_id: tests[3].id},
-                             {body: "как объеденить с помощью joins", test_id: tests[2].id}])
+                             {body: "как объеденить с помощью joins", test_id: tests)
  
 
 answers = Answer.create!([{correct: true, question_id: questions[0].id, body: "an1"},
