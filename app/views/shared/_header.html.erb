@@ -7,6 +7,7 @@
         <%= link_to "Admin", admin_tests_path %>|
         <% end %>
       <%= link_to t(".logout"), destroy_user_session_path, method: :delete %>
+      <%= link_to t(".feedback"), new_form_back_path %>
     <% else %>
       <%= link_to t(".log_in"), new_session_path(resource_name) %> | 
       <%= link_to t(".sign_up"), new_registration_path(resource_name) %> 

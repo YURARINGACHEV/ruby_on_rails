@@ -32,5 +32,5 @@ Rails.application.routes.draw do
   end
   resources :gists, only: %i[show index]
 end
-
+  resources :form_back, only: %i[new create]
 end

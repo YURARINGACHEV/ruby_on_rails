@@ -71,6 +71,15 @@ ru:
     completed_test:
       subject: "Вы успешно завершили тест!"
 
+  form_back:
+    new:
+      header: "Обратная связь"
+      label: "Сообщение"
+      submit: "Отправить"
+    create:
+      form: "Форма не должна быть пустой"
+
+
   shared:
     footer:
       author: "Автор"
@@ -80,6 +89,7 @@ ru:
       welcome: "Приветствую %{user} Гуру!"
       log_in: "Войти"
       sign_up: "Зарегистрироваться"
+      feedback: "Обратная связь"
 
   
   

@@ -27,7 +27,7 @@ tests = Test.create!([{author: users[0], title: "Rails", level: "4", category_id
 questions = Question.create!([{body: "Как вывести список всех Тестов,которые проходит или когда-либо проходил Пользователь", test_id: tests[0].id},
                              {body: "Вывести название всех тестов с определенной категории", test_id: tests[1].id},
                              {body: "как объеденить с помощью joins", test_id: tests[3].id},
-                             {body: "как объеденить с помощью joins", test_id: tests)
+                             {body: "как объеденить с помощью joins", test_id: tests}])
  
 
 answers = Answer.create!([{correct: true, question_id: questions[0].id, body: "an1"},

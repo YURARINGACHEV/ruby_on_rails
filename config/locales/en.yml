@@ -70,6 +70,14 @@ en:
     completed_test:
       subject: "You just completed the TesrGuru test!"
 
+  form_back:
+    new:
+      header: "Feedback"
+      label: "Message"
+      submit: "send"
+    create:
+      form: "The form must not be empty"
+
   shared:
     footer: 
       author: "Author"
@@ -79,6 +87,7 @@ en:
       welcome: "Welcom %{user} Guru!"
       log_in: "Log in"
       sign_up: "Sign up"
+      feedback: "Feedback"
 
   layouts:
     admin:

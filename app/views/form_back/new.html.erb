@@ -1,0 +1,17 @@
+<h1><%= t(".header")%></h1>
+
+<div class="row">
+  <div class="col col-sm-5">
+    <%= form_with url: form_back_index_path, local: true do |f| %>
+
+      <div class="mb-3">
+        <%= f.label :message, t('.label'), class: 'form-label' %>
+        <%= f.text_area :message, id: :message, rows: 7, class: 'form-control' %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.submit t(".submit"), class: "btn btn-outline-primary btn-sm" %>
+      </div>
+    <% end %>
+  </div>
+</div>
