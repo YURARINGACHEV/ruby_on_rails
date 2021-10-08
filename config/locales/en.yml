@@ -29,6 +29,8 @@ en:
       question: "Question"
       actions: "Actions"
       start: "start"
+    start:
+      questions: "Test '%{title}' has no questions created"
 
   test_users:
     result:

@@ -9,9 +9,14 @@ class TestsController < ApplicationController
   end
 
   def start
+    if @test.questions.empty?
+      redirect_to root_path, alert:  t(".questions", title: @test.title)
+    else
     current_user.tests.push(@test)
     redirect_to current_user.test_user(@test)
   end
+end
+
 
   private
   

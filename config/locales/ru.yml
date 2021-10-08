@@ -38,6 +38,8 @@ ru:
       question: "Вопрос"
       actions: "Действие"
       start: "старт"
+    start:
+      questions: "У теста '%{title}' нет созданных вопросов"
   
   admin:
     tests:
