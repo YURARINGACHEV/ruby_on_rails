@@ -3,7 +3,7 @@ class Admin::TestsController < Admin::BaseController
   before_action :authenticate_user!
 
   before_action :all_test, only: %i[index update_inline] 
-  before_action :find_test, only: [:show, :edit, :update, :destroy, :start, :update_inline]
+  before_action :find_test, only: [:show, :destroy, :edit, :update, :start, :update_inline]
 
   def index
 

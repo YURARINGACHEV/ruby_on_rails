@@ -5,7 +5,7 @@
   <%= content_tag :div, "progress",
                     class: "progress-bar indicator-progress",
                     data: { questions_count: @test_user.test.questions.count,
-                            questions_index: @test_user.index_question } %>
+                            questions_index: @test_user.progress_index_question } %>
 </div>
 
 <p>
@@ -17,13 +17,14 @@
 <%= form_with url: test_user_path(@test_user), local: true, method: :put do |form| %>
   <%= form.collection_check_boxes :answer_ids, @test_user.current_question.answers, :id, :body, include_hidden: false do |b| %>
     <p>
-    	<%= b.check_box id: "answer_ids_#{b.object.id}" %>
+    	<%= b.check_box id: "answer_ids_#{b.object.id}"%>
+                  
     	<%= b.label %>
 
     </p>
   <%end%>
   <p><%= link_to 'Gist Question', gist_test_user_path(@test_user), method: :post %></p>
-  <p><%= form.submit "Next" %></p>
+  <p><%= form.submit "Next" , class: "btn btn-success submit_progress"%></p>
 
 <%= javascript_pack_tag 'utilities/indicator_progress.js' %>
 <% end %>

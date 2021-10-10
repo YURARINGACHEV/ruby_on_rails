@@ -34,6 +34,10 @@ class TestUser < ApplicationRecord
     test.questions.index(current_question) + 1
   end
 
+  def progress_index_question
+    test.questions.index(current_question)
+  end
+
   private
   
   def before_validation_next_question
