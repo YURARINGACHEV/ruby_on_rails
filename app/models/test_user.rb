@@ -31,7 +31,7 @@ class TestUser < ApplicationRecord
   end
   
   def index_question
-    test.questions.index(current_question) + 1
+    progress_index_question + 1
   end
 
   def progress_index_question
