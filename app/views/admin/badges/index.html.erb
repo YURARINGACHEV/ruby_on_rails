@@ -1,0 +1,19 @@
+<h1>Baddge</h1>
+
+<table>
+  <% if @badges.present? %>
+  <tr>
+    <th>title</th>
+    <th>image_url</th>
+    <th>rule</th>
+    <th>value</th>
+  </tr>
+
+  <%= render @badges %>
+  <%else%>
+     <p>You have not badge at this moment</p>
+   <%end%>
+
+
+</table>
+<%= link_to "Back_all_test", admin_tests_path(@test) %>
