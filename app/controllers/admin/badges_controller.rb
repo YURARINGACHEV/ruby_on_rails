@@ -9,9 +9,9 @@ class Admin::BadgesController < Admin::BaseController
 
   end
 
-  # def show
+  def show
   
-  # end
+  end
  
   def new
     @badge = Badge.new
@@ -19,7 +19,7 @@ class Admin::BadgesController < Admin::BaseController
 
 
   def create
-    @badge = current_user.badges.new(badge_params)
+    @badge = Badge.new(badge_params)
    
     if @badge.save
       redirect_to [:admin, @badge], notice: "Бэйдж создан"
@@ -52,9 +52,9 @@ class Admin::BadgesController < Admin::BaseController
     @badges = Badge.all
   end
 
-  # def find_badge
-  #   @badge = Badge.find(params[:id])
-  # end
+  def find_badge
+    @badge = Badge.find(params[:id])
+  end
 
   def badge_params
     params.require(:badge).permit( :title, :image_url, :rule, :value)

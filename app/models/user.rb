@@ -12,7 +12,9 @@ class User < ApplicationRecord
   has_many :test_users
   has_many :tests, through: :test_users
   has_many :gists
-  has_many :badges, dependent: :destroy
+  has_many :user_test_user_badges, dependent: :destroy
+  has_many :badge, through: :user_test_user_badges
+
 
   def show_list_test(level)
     tests.where(level: level)

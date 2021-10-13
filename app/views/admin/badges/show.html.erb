@@ -1,0 +1,14 @@
+<p>
+  <strong>Title</strong>
+  <%= @badge.title %>   
+</p>
+
+<p>
+  <strong>image</strong>
+  <%=  link_to @badge.image_url, @badge.image_url, target: :blank %>   
+</p>
+
+
+<%= link_to 'New badge', new_admin_badge_path(@test) %>
+
+<%= link_to 'Back all tests', admin_tests_path %>

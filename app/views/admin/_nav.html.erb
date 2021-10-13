@@ -3,6 +3,7 @@
   
   <span class="navbar-text">
     <% if user_signed_in? %>
+      <%= link_to "All_badge", admin_badges_path %>|
       <%= link_to 'All Gists', admin_gists_path %> | 
       <%= link_to t(".test_list"), admin_tests_path %> | 
       <%= link_to t(".create_test"), new_admin_test_path %> | 

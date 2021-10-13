@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'badges/index'
   root 'tests#index'
 
   devise_for :users, path: :gurus, path_names: { sign_in: :login, sign_out: :logout }
@@ -35,4 +33,5 @@ Rails.application.routes.draw do
   resources :badges 
 end
   resources :form_back, only: %i[new create]
+  resources :badges, only: %i[index show]
 end
