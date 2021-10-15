@@ -7,23 +7,21 @@ class TestUser < ApplicationRecord
   belongs_to :current_question, class_name: "Question", optional: true
 
   has_many :user_test_user_badges, dependent: :destroy
-  has_many :badge, through: :user_test_user_badges
+  has_many :badges, through: :user_test_user_badges
 
   before_validation :before_validation_set_first_question, on: :create 
   before_validation :before_validation_next_question, on: :update
+
+  scope :join_test_user, -> (user_id, test_id)  { self.joins(:test).where(test_users: { user: user_id, test: test_id }) }
+
+  def self.tests_success(user_id, test_id)
+    join_test_user(user_id, test_id).where(successful_tests: true).pluck(:test_id)
+  end
 
   def completed?
     current_question.nil?
   end
 
-  # def numberя_of_attempts(user_id, test_id)
-  #   TestUser.where(user: user_id, test: test_id).count
-  # end
-
-  # def test_category(user, test)
-  #   TestUser.where(user: user.id, test: test.category.title)
-  # end
-  
   def accept!(answer_ids)
     if correct_answer?(answer_ids)
       self.correct_questions +=1
@@ -49,14 +47,17 @@ class TestUser < ApplicationRecord
   end
 
   private
-  
-  def before_validation_next_question
-    self.current_question = next_question
-  end
 
   def before_validation_set_first_question
     self.current_question = test.questions.first if test.present?
   end
+
+  
+  def before_validation_next_question
+    self.current_question = next_question if self.current_question.present?
+  end
+
+
   
   def correct_answer?(answer_ids)
     correct_answers_count = correct_answers.count

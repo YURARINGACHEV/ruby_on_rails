@@ -15,7 +15,20 @@ class Test < ApplicationRecord
   scope :join_category_test, -> (title)  { self.joins(:category).where(categories: { title: title }) }  
 
   def self.order_mas_title(title)
-    join_category_test(title).order(title: :DESC).pluck('tests.title')
+    join_category_test(title).order(title: :DESC).pluck("tests.title")
+  end
+
+  def self.order_mas_id(title)
+    join_category_test(title).order(title: :DESC).pluck(:id)
+  end
+
+  def self.order_mas_level(title)
+    join_category_test(title).order(title: :DESC).pluck("tests.level")
   end
 
 end
+
+
+# s = TestUser.where(user: 2, test: Test.order_mas_title("Rails")).where(successful_tests: "t").pluck(:test_id).uniq
+
+# t=Test.order_mas_id("Rails")

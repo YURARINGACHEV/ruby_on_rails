@@ -1,24 +1,34 @@
 class BadgeService
 
-	def initialize(test_user, user, test, badge)
+	def initialize(test_user, user)
     @test_user = test_user
     @user = user
-    @test = test
-    @badge = badge
+
+    call
 	end	
 
-	def category_complete
-		return true if @test_user.test.category.title == @badge.value
+  def call
+    Badge.all.each do |badge|
+      @user.badges << badge if send(badge.rule, badge.value)
+    end
   end
 
-  def tests_of_a_certain_level
-  	return true if @test_user.test.level == @badge.value
+	def category_complete_award?(category_title)
+    category_id = Test.order_mas_title(category_title).uniq
+		return true if TestUser.tests_success(@test_user.user, @test_user.test) == category_id
   end
 
-  def on_the_first_try
-  	@test_user.numberя_of_attempts(@user.id, @test.id) == @badge.value
+  def tests_of_a_certain_level_award?(level)
+  	return true if @test_user.test.level == level
+  end
+
+  def on_the_first_try_award?(number)
+  	TestUser.where(user: @test_user.user, test: @test_user.test).count == number
   end
 
 end
 										
 
+# s = TestUser.where(user: 2, test: Test.order_mas_title("Rails")).where(successful_tests: "t").pluck(:test_id).uniq
+
+# t=Test.order_mas_title("Rails")
