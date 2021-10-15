@@ -15,14 +15,6 @@ class TestUser < ApplicationRecord
   def completed?
     current_question.nil?
   end
-
-  # def numberя_of_attempts(user_id, test_id)
-  #   TestUser.where(user: user_id, test: test_id).count
-  # end
-
-  # def test_category(user, test)
-  #   TestUser.where(user: user.id, test: test.category.title)
-  # end
   
   def accept!(answer_ids)
     if correct_answer?(answer_ids)
