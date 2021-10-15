@@ -17,17 +17,16 @@ users = User.create!([{name: "Gerrard", email: 'yura.ryngachev@gmail.com', passw
 
 
 tests = Test.create!([{author: users[0], title: "Rails", level: "4", category_id: categories[0].id},
-                     {author: users[1], title: "Rail", level: "4", category_id: categories[0].id},
-                     {author: users[2], title: "Ruby", level: "2", category_id: categories[1].id},
-                     {author: users[3], title: "SQL", level: "1", category_id: categories[2].id}])
+                     {author: users[0], title: "Rail", level: "4", category_id: categories[0].id},
+                     {author: users[0], title: "Ruby", level: "2", category_id: categories[1].id},
+                     {author: users[0], title: "SQL", level: "1", category_id: categories[2].id}])
 
 
 
 
 questions = Question.create!([{body: "Как вывести список всех Тестов,которые проходит или когда-либо проходил Пользователь", test_id: tests[0].id},
                              {body: "Вывести название всех тестов с определенной категории", test_id: tests[1].id},
-                             {body: "как объеденить с помощью joins", test_id: tests[3].id},
-                             {body: "как объеденить с помощью joins", test_id: tests}])
+                             {body: "как объеденить с помощью joins", test_id: tests[3].id}])
  
 
 answers = Answer.create!([{correct: true, question_id: questions[0].id, body: "an1"},
@@ -37,8 +36,11 @@ answers = Answer.create!([{correct: true, question_id: questions[0].id, body: "a
                          {correct: false, question_id: questions[1].id, body: "an5"},
                          {correct: false, question_id: questions[1].id, body: "an6"}])
 
-test_users = TestUser.create!([{user_id: users[0].id, test_id: tests[0].id},
-                              {user_id: users[0].id, test_id: tests[1].id},
-                              {user_id: users[2].id, test_id: tests[2].id},
-                             {user_id: users[1].id, test_id: tests[3].id}])
+# test_users = TestUser.create!([{user_id: users[0].id, test_id: tests[0].id},
+#                               {user_id: users[0].id, test_id: tests[1].id},
+#                               {user_id: users[2].id, test_id: tests[2].id},
+#                              {user_id: users[1].id, test_id: tests[3].id}])
 
+badges = Badge.create!([{title: "за категорию", image_url: "https://wall.alphacoders.com/big.php?i=96656&lang=Russian", rule: "category_complete_award?", value: "Rails"},
+                        {title: "за уровень", image_url: "https://wall.alphacoders.com/big.php?i=96656&lang=Russian", rule: "tests_of_a_certain_level_award?", value: 4},
+                        {title: "с первого раза", image_url: "https://wall.alphacoders.com/big.php?i=96656&lang=Russian", rule: "on_the_first_try_award?", value: "1"}])

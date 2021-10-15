@@ -12,16 +12,18 @@ class TestUsersController < ApplicationController
 
   def update
     @test_user.accept!(params[:answer_ids])
-
+    
     if @test_user.completed?
+      @test_user.update(successful_tests: true)
       TestsMailer.completed_test(@test_user).deliver_now
+      BadgeService.new(@test_user, current_user)
       redirect_to result_test_user_path(@test_user)
     else
       render :show
     end
   end
 
- def gist
+  def gist
     result = GistQuestionService.new(@test_user.current_question)
     result.call
 
@@ -31,7 +33,7 @@ class TestUsersController < ApplicationController
       
     else
       { alert: t(".failure") }
-    end
+  end
 
     redirect_to @test_user, flash_options
     
@@ -42,5 +44,4 @@ class TestUsersController < ApplicationController
   def set_test_user
     @test_user = TestUser.find(params[:id])
   end
-
 end
