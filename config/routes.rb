@@ -33,5 +33,5 @@ Rails.application.routes.draw do
   resources :badges 
 end
   resources :form_back, only: %i[new create]
-  resources :badges, only: %i[index show]
+  resources :badges, only: %i[index]
 end

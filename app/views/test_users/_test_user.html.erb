@@ -1,6 +1,9 @@
 <% if @test_user.success_rate? %>
       <h2 style="color:#00ff00">Ваш результат: <%= @test_user.percentage_result %> %</h2>
       <p style="color:#00ff00">Вы успешно прошли тест</p>
+      <% if current_user.badges.present? %>
+        <p style="color:#00ff00">Вы заслужили Badge</p>
+      <% end %>
 
 
 <% else  %>

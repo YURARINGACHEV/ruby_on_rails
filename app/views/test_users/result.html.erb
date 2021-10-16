@@ -4,5 +4,7 @@
 
 <p><%= @test_user.percentage_result %></p>
 
+
 <p><%= render @test_user %></p>
+<%= link_to "all_badge", badges_path %>
 <%= link_to 'Back test', tests_path(@test_user.test) %>

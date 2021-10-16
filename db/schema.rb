@@ -80,19 +80,20 @@ ActiveRecord::Schema.define(version: 2021_10_13_222132) do
     t.bigint "user_id", null: false
     t.index ["category_id", "user_id"], name: "index_tests_on_category_id_and_user_id"
     t.index ["category_id"], name: "index_tests_on_category_id"
+    t.index ["level"], name: "index_tests_on_level"
     t.index ["title", "level"], name: "index_tests_on_title_and_level", unique: true
     t.index ["user_id"], name: "index_tests_on_user_id"
   end
 
-  create_table "user_test_badges", force: :cascade do |t|
+  create_table "user_test_user_badges", force: :cascade do |t|
     t.bigint "test_user_id"
     t.bigint "user_id"
     t.bigint "badge_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["badge_id"], name: "index_user_test_badges_on_badge_id"
-    t.index ["test_user_id"], name: "index_user_test_badges_on_test_user_id"
-    t.index ["user_id"], name: "index_user_test_badges_on_user_id"
+    t.index ["badge_id"], name: "index_user_test_user_badges_on_badge_id"
+    t.index ["test_user_id"], name: "index_user_test_user_badges_on_test_user_id"
+    t.index ["user_id"], name: "index_user_test_user_badges_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -131,7 +132,7 @@ ActiveRecord::Schema.define(version: 2021_10_13_222132) do
   add_foreign_key "test_users", "users"
   add_foreign_key "tests", "categories"
   add_foreign_key "tests", "users"
-  add_foreign_key "user_test_badges", "badges"
-  add_foreign_key "user_test_badges", "test_users"
-  add_foreign_key "user_test_badges", "users"
+  add_foreign_key "user_test_user_badges", "badges"
+  add_foreign_key "user_test_user_badges", "test_users"
+  add_foreign_key "user_test_user_badges", "users"
 end
