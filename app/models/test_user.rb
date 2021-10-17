@@ -9,10 +9,8 @@ class TestUser < ApplicationRecord
   before_validation :before_validation_set_first_question, on: :create 
   before_validation :before_validation_next_question, on: :update
 
-  scope :join_test_user, -> (user_id, test_id)  { self.joins(:test).where(test_users: { user: user_id, test: test_id }) }
-
-  def self.tests_success(user_id, test_id)
-    join_test_user(user_id, test_id).where(successful_tests: true).pluck(:test_id)
+  def self.tests_success  
+    TestUser.where(successful_tests: true)
   end
 
   def completed?

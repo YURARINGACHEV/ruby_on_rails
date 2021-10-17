@@ -27,8 +27,3 @@ class Test < ApplicationRecord
   end
 
 end
-
-
-# s = TestUser.where(user: 2, test: Test.order_mas_title("Rails")).where(successful_tests: "t").pluck(:test_id).uniq
-
-# t=Test.order_mas_id("Rails")

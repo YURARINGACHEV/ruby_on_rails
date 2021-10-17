@@ -5,14 +5,9 @@ class Badge < ApplicationRecord
 	has_many :user_test_user_badges
   has_many :users, through: :user_test_user_badges
 
-  validates :title, presence: true
-  validates :rule, presence: true
-  validates :value, presence: true
-  validates :image_url, presence: true
+  validates :title, :rule, :value, :image_url, presence: true
 
   def self.select_badge
     @rule_type = RULE
   end
-  
-
 end

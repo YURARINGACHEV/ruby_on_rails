@@ -86,13 +86,11 @@ ActiveRecord::Schema.define(version: 2021_10_13_222132) do
   end
 
   create_table "user_test_user_badges", force: :cascade do |t|
-    t.bigint "test_user_id"
     t.bigint "user_id"
     t.bigint "badge_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["badge_id"], name: "index_user_test_user_badges_on_badge_id"
-    t.index ["test_user_id"], name: "index_user_test_user_badges_on_test_user_id"
     t.index ["user_id"], name: "index_user_test_user_badges_on_user_id"
   end
 
@@ -133,6 +131,5 @@ ActiveRecord::Schema.define(version: 2021_10_13_222132) do
   add_foreign_key "tests", "categories"
   add_foreign_key "tests", "users"
   add_foreign_key "user_test_user_badges", "badges"
-  add_foreign_key "user_test_user_badges", "test_users"
   add_foreign_key "user_test_user_badges", "users"
 end

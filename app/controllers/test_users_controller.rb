@@ -16,7 +16,7 @@ class TestUsersController < ApplicationController
     if @test_user.completed?
       @test_user.update(successful_tests: true) if @test_user.success_rate?
       TestsMailer.completed_test(@test_user).deliver_now
-      BadgeService.new(@test_user, current_user)
+      BadgeService.new(@test_user, current_user).call
       redirect_to result_test_user_path(@test_user)
     else
       render :show

@@ -3,8 +3,6 @@ class BadgeService
 	def initialize(test_user, user)
     @test_user = test_user
     @user = @test_user.user
-
-    call
 	end	
 
   def call
@@ -14,22 +12,21 @@ class BadgeService
     end
   end
 
-	def category_complete_award?(category_title)
-    
-    category_id = Test.order_mas_id(category_title).uniq
-    c_id = TestUser.where(user: @test_user.user, test: Test.order_mas_id("Rails")).where(successful_tests: true).pluck(:test_id).uniq 
-    return true if c_id == category_id
+	def category_complete_award?(category_title)  
+    tests_ids_from_categories = Test.order_mas_id(category_title).uniq
+    success_tests_ids_from_categories = TestUser.tests_success.where(user: @user, test: tests_ids_from_categories).pluck(:test_id).uniq 
+    success_tests_ids_from_categories == tests_ids_from_categories
   end
 
   def tests_of_a_certain_level_award?(level)
-    value_level = Test.where(level: level).pluck(:id)
-    level = TestUser.where(successful_tests: true).where(user: @user, test: Test.where(level: level).pluck(:id)).pluck(:test_id).uniq
-
-    return true if value_level == level
+    level_tests_ids = Test.where(level: level).pluck(:id)
+    success_level_tests_ids = TestUser.tests_success.where(user: @user, test: level_tests_ids).pluck(:test_id).uniq
+    success_level_tests_ids== level_tests_ids 
   end
 
   def on_the_first_try_award?(number)
-    return true if TestUser.where(user: @test_user.user, test: @test_user.test).count == 1
+    TestUser.tests_success.where(user: @user, test: @test_user.test).count == 1
   end
 
 end
+
