@@ -26,4 +26,8 @@ class Test < ApplicationRecord
     join_category_test(title).order(title: :DESC).pluck("tests.level")
   end
 
+  def timer_zero?
+    self.passage_timer > 0
+  end
+
 end

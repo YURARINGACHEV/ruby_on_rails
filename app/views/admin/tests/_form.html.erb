@@ -4,18 +4,26 @@
  <%= render 'shared/errors', resource: @test%>
   
   <p>
-    <%= form.label :title%><br>
+    <%= form.label :title %><br>
     <%= form.text_field :title, id: :test_title%>
-  </p><br>
+  </p>
   <p>
-    <%= form.label :level%><br>
+    <%= form.label :level %><br>
     <%= form.number_field :level, id: :test_level%>
-  </p><br>
+  </p>
+
+  <p>
+    <%= form.label :passage_timer %><br>
+    <%= form.number_field :passage_timer, id: :test_passage_timer%>
+  </p>
+
 
   <p>
     <%= form.label :category_id %><br>:
     <%= form.collection_select :category_id, Category.all, :id, :title, prompt: true %>
   </p><br>
+
+
 
   <p><%= form.submit %></p>
  

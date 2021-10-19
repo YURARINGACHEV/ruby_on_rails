@@ -25,7 +25,7 @@ ru:
 
   test_users:
     result:
-      header: "Тест %{title} успешно пройден!"
+      header: "Тест %{title} завершен!"
     gist: 
       success: "Gist успешно сохранен!"
       failure: "Во время сохранения gist произошла ошибка!"
@@ -37,7 +37,9 @@ ru:
       level: "Уровень"
       question: "Вопрос"
       actions: "Действие"
+      passage_test: "Таймер"
       start: "старт"
+      
     start:
       questions: "У теста '%{title}' нет созданных вопросов"
   
@@ -51,6 +53,7 @@ ru:
         level: "Уровень"
         question: "Вопрос"
         actions: "Действие"
+        passage_test: "Таймер"
         new_test: "Новый тест"
         show: "Показать"
         edit: "Изменить"

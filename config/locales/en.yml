@@ -28,6 +28,7 @@ en:
       level: "Level"
       question: "Question"
       actions: "Actions"
+      passage_test: "Timer"
       start: "start"
     start:
       questions: "Test '%{title}' has no questions created"
@@ -50,6 +51,7 @@ en:
       level: "Level"
       question: "Question"
       actions: "Actions"
+      passage_test: "Timer"
       new_test: "New test"
       show: "Show"
       edit: "Edit"
