@@ -21,7 +21,6 @@ class TestUsersController < ApplicationController
       else
         render :show
       end
-    # end
   end
 
   def gist
