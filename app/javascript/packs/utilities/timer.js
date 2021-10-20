@@ -12,6 +12,11 @@ function startTimer(control, time) {
         time--;
         setTimeout(startTimer, 1000, control, time);
     } 
+    else{
+        
+        alert("Время вышло. Выбирете ответ и нажмите Next")
+
+    }
 }
 
 function format(number) {

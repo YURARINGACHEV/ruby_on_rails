@@ -11,13 +11,8 @@ class TestUsersController < ApplicationController
   end
 
   def update
-    if @test_user.remaining_time <=0
       @test_user.accept!(params[:answer_ids])
-      TestsMailer.completed_test(@test_user).deliver_now
-      redirect_to result_test_user_path(@test_user)
-    else
-      @test_user.accept!(params[:answer_ids])
-      if @test_user.completed?
+      if @test_user.completed? || @test_user.expired?
         
         @test_user.update(successful_tests: true) if @test_user.success_rate?
         TestsMailer.completed_test(@test_user).deliver_now
@@ -26,7 +21,7 @@ class TestUsersController < ApplicationController
       else
         render :show
       end
-    end
+    # end
   end
 
   def gist
