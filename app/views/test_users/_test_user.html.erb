@@ -7,6 +7,12 @@
 
 
 <% else  %>
-	<h2 style="color:#ff0000">Ваш результат: <%= @test_user.percentage_result %> %</h2>
-      <p style="color:#ff0000">Вы не прошли тест</p>
-  <%end%>
+  <% if @test_user.test.timer_zero? %>
+    <h1 style="color:#ff0000">Время вышло</h1>
+	  <h2 style="color:#ff0000">Ваш результат: <%= @test_user.percentage_result %> %</h2>
+    <p style="color:#ff0000">Вы не прошли тест</p>
+  <% else %>
+    <h2 style="color:#ff0000">Ваш результат: <%= @test_user.percentage_result %> %</h2>
+    <p style="color:#ff0000">Вы не прошли тест</p>
+  <% end %>  
+<%end%>

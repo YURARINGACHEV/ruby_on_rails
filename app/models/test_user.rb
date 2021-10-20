@@ -33,6 +33,14 @@ class TestUser < ApplicationRecord
     percentage_result >= SUCCESS_RATE  
   end
   
+  def remaining_time
+    (self.test.passage_timer - (Time.current - self.created_at).seconds).to_i
+  end
+
+  def expired?
+    remaining_time <= 0
+  end
+
   def index_question
     progress_index_question + 1
   end

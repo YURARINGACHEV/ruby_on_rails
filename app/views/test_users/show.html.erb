@@ -1,6 +1,14 @@
 <h1>Passing the <%= @test_user.test.title %> Test</h1>
 <p>Всего вопросов <%= @test_user.test.questions.count %> </p>
 
+ <% if @test_user.test.timer_zero? %>
+  <%= content_tag :div,
+                  class: 'timer',
+                  data: { remaining_time: @test_user.remaining_time } do %>
+                  <span>Время на прохождение теста</span>
+    <%= content_tag :p, nil, class: 'timer_label' %>
+  <% end %>
+  <% end %>
 <div class="progress ">
   <%= content_tag :div, "progress",
                     class: "progress-bar indicator-progress",
@@ -14,7 +22,7 @@
   </b>
 </p>
 
-<%= form_with url: test_user_path(@test_user), local: true, method: :put do |form| %>
+<%= form_with url: test_user_path(@test_user),class: "time_is_over", local: true, method: :put do |form| %>
   <%= form.collection_check_boxes :answer_ids, @test_user.current_question.answers, :id, :body, include_hidden: false do |b| %>
     <p>
     	<%= b.check_box id: "answer_ids_#{b.object.id}"%>          
@@ -27,3 +35,4 @@
 
 <%= javascript_pack_tag 'utilities/indicator_progress.js' %>
 <% end %>
+<%= javascript_pack_tag 'utilities/timer.js' %>

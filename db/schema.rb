@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_13_222132) do
+ActiveRecord::Schema.define(version: 2021_10_18_015240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_10_13_222132) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
+    t.integer "passage_timer", default: 0
     t.index ["category_id", "user_id"], name: "index_tests_on_category_id_and_user_id"
     t.index ["category_id"], name: "index_tests_on_category_id"
     t.index ["level"], name: "index_tests_on_level"

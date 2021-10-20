@@ -10,6 +10,7 @@ en:
         author: "Author"
         category_id: "Category"
         category: "Category"
+        passage_timer: "Passage_timer"
     errors:
       messages:
         blank: "can't be blank"

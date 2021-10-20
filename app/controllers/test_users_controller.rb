@@ -11,16 +11,16 @@ class TestUsersController < ApplicationController
   end
 
   def update
-    @test_user.accept!(params[:answer_ids])
-    
-    if @test_user.completed?
-      @test_user.update(successful_tests: true) if @test_user.success_rate?
-      TestsMailer.completed_test(@test_user).deliver_now
-      BadgeService.new(@test_user, current_user).call
-      redirect_to result_test_user_path(@test_user)
-    else
-      render :show
-    end
+      @test_user.accept!(params[:answer_ids])
+      if @test_user.completed? || @test_user.expired?
+        
+        @test_user.update(successful_tests: true) if @test_user.success_rate?
+        TestsMailer.completed_test(@test_user).deliver_now
+        BadgeService.new(@test_user, current_user).call
+        redirect_to result_test_user_path(@test_user)
+      else
+        render :show
+      end
   end
 
   def gist

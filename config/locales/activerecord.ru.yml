@@ -10,6 +10,7 @@ ru:
         author: "Автор"
         category_id: "Категория"
         category: "Категория"
+        passage_timer: "Таймер прохождения теста"
     errors:
       messages:
         blank: "не может быть пустым"
