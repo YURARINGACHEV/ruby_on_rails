@@ -22,7 +22,7 @@
   </b>
 </p>
 
-<%= form_with url: test_user_path(@test_user), local: true, method: :put do |form| %>
+<%= form_with url: test_user_path(@test_user),class: "time_is_over", local: true, method: :put do |form| %>
   <%= form.collection_check_boxes :answer_ids, @test_user.current_question.answers, :id, :body, include_hidden: false do |b| %>
     <p>
     	<%= b.check_box id: "answer_ids_#{b.object.id}"%>          

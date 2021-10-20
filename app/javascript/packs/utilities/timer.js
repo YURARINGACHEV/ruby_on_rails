@@ -14,7 +14,7 @@ function startTimer(control, time) {
     } 
     else{
         
-        alert("Время вышло. Выбирете ответ и нажмите Next")
+        document.querySelector('.time_is_over').submit();
 
     }
 }
